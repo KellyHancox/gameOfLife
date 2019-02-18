@@ -2,34 +2,41 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*
- * get_grid creates new memory for a "grid".
+/**********************************************************************
+ * Creates new memory for a "grid".
  * x is the height and y is the width.
- */
+ * @param x width
+ * @param y height
+ * @return char** double array
+ **********************************************************************/
 char** get_grid(int x, int y){
 
     //Creates a new x by y grid, allocating all memory
-    //through malloc. Checks for errors and exits gracefully with appropriate return message if
+    //through malloc. Checks for errors and exits
+    //gracefully with appropriate return message if
     //memory cannot be allocated. Returns the grid.
 
-    //when could it not be allocated?
-
     char** board;
-    board = malloc( y * sizeof( char* ) ) ;  // Statement 1
+    board = malloc( y * sizeof( char* ) ) ;
 
     for( int i=0; i < x; ++i )
     {
-        board[i] = malloc(y) ; // Statement 2
+        board[i] = malloc(y) ;
     }
 
     return board;
 }
 
 /*
- * print_grid attempts to print an x height
- * by y width grid stored at the location
- * provided by grid
+ * print_grid
  */
+/*********************************************************************
+ * Attempts to print an x height by y width grid stored at
+ * the location provided by grid
+ * @param x width
+ * @param y height
+ * @param grid gol board
+ ********************************************************************/
 void print_grid(int x, int y, char** grid){
 
     //Prints a human-readable grid.
@@ -44,17 +51,17 @@ void print_grid(int x, int y, char** grid){
 }
 
 /*
- * Mutate takes a grid and mutates that grid
- * according to Conway's rules.  A new grid
- * is returned.
+ *
  */
+/*********************************************************************
+ * Mutate takes a grid and mutates that grid
+ * according to Conway's rules.  A new grid is returned.
+ * @param x width
+ * @param y height
+ * @param grid old grid
+ * @return new grid
+ *********************************************************************/
 char** mutate(int x, int y, char** grid) {
-
-
-    //Given a grid, returns a new grid
-    //with Conway’s rules applied to each cell.
-    // This function will need to create a new grid; the old
-    //grid should not be modified while being examined.
 
     char** newGrid;
     newGrid = malloc(y * sizeof(char *));  // Statement 1
@@ -94,17 +101,21 @@ char** mutate(int x, int y, char** grid) {
     return newGrid;
 }
 
-/* get_neighbors is a helper method that returns
- * the number of live neighbors a cell has.
+/*
+ 
+ */
+/********************************************************************
+ * Helper method that returns the number of live neighbors a cell has
+ * @param i given coordinate row
+ * @param j given coordinate column
+ * @param x number of rows
+ * @param y number of columns
+ * @param grid board
+ * @return returns how many neighbors from i,j are alive
  */
 int get_neighbors(int i, int j, int x, int y, char** grid){
 
     int count = 0;
-
-    //Given
-    //a coordinate (i,j) and a grid, determine how many
-    // neighbors the cell has. Return -1 if the cell
-    //can’t exist in the grid. Correctly handle grid boundaries.
 
     //if out of bounds
     if(i < 0 || i > x || j < 0 || j > y){
@@ -317,6 +328,7 @@ int get_neighbors(int i, int j, int x, int y, char** grid){
         return count;
     }
 
+    //in case any checks failed
     else{
         return -1;
     }
